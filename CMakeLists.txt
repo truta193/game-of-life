@@ -3,4 +3,10 @@ project(Sandbox C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(Sandbox main.c)
+add_executable(Sandbox main.c external/glad/src/glad.c ametrine.h)
+
+find_package(OpenGL REQUIRED)
+
+include_directories(external/glad/include ${OPENGL_INCLUDE_DIRS} ${X11_INCLUDE_DIR} external/stb_image m)
+
+target_link_libraries(Sandbox ${OPENGL_LIBRARIES} ${X11_LIBRARIES} m gdi32 winmm)

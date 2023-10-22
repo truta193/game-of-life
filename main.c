@@ -1,7 +1,12 @@
 #include <stdio.h>
+#include "ametrine.h"
+
+#define GRID_WIDTH 1280
+#define GRID_HEIGHT 720
 
 int main() {
 
-    printf("Hello, World!\n");
+    char grid[GRID_WIDTH][GRID_HEIGHT];
+
     return 0;
 }

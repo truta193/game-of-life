@@ -1,9 +1,10 @@
 cmake_minimum_required(VERSION 3.26)
-project(Sandbox C)
+project(Sandbox)
 
-set(CMAKE_C_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 
-add_executable(Sandbox main.c external/glad/src/glad.c ametrine.h)
+add_executable(Sandbox main.cpp external/glad/src/glad.c ametrine.h
+        elements.h)
 
 find_package(OpenGL REQUIRED)
 

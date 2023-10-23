@@ -5,8 +5,8 @@ set(CMAKE_CXX_STANDARD 17)
 
 add_executable(Sandbox main.cpp external/glad/src/glad.c ametrine.h
         elements.h
-        Elements/Element.cpp
-        Elements/Element.h)
+        elements/Element.cpp
+        elements/Element.h)
 
 find_package(OpenGL REQUIRED)
 

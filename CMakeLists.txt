@@ -4,7 +4,8 @@ project(Sandbox C)
 set(CMAKE_C_STANDARD 17)
 
 add_executable(Sandbox main.c external/glad/src/glad.c ametrine.h
-        elements.h)
+        elements.h
+)
 
 find_package(OpenGL REQUIRED)
 

@@ -881,12 +881,12 @@ typedef struct amgl_uniform {
 } amgl_uniform;
 
 //Textures
-/*
+
 typedef enum amgl_texture_update_type {
     AMGL_TEXTURE_UPDATE_RECREATE,
     AMGL_TEXTURE_UPDATE_SUBDATA
 } amgl_texture_update_type;
-*/
+
 
 typedef enum amgl_texture_format {
     AMGL_TEXTURE_FORMAT_INVALID,
@@ -4140,6 +4140,30 @@ am_id amgl_texture_create(amgl_texture_info info) {
         am_free(info.data);
     };
     return ret_id;
+};
+
+am_int32 amgl_texture_update(am_int32 id,  amgl_texture_update_type type, amgl_texture_info new_info) {
+    amgl_texture *tex = am_packed_array_get_ptr(am_engine_get_subsystem(ctx_data).textures, id);
+    printf("[OK] amgl_texture_update (id: %u): Updating texture!\n", id);
+
+    glBindTexture(GL_TEXTURE_2D, tex->handle);
+
+    switch (type) {
+        case AMGL_TEXTURE_UPDATE_SUBDATA: {
+            //TODO: Only does base texture, not mipmaps, iterate over them
+            //TODO: Type is unsigned byte, might need to allow other types
+            glTexImage2D(GL_TEXTURE_2D, 0, amgl_texture_translate_format(new_info.format), (am_int32)new_info.width, (am_int32)new_info.height, 0, amgl_texture_translate_format(new_info.format), GL_UNSIGNED_BYTE, new_info.data);
+            break;
+        }
+        case AMGL_TEXTURE_UPDATE_RECREATE: {
+            //TODO: This
+            break;
+        }
+
+        default: break;
+    }
+
+    glBindTexture(GL_TEXTURE_2D, 0);
 };
 
 am_int32 amgl_texture_translate_format(amgl_texture_format format) {
